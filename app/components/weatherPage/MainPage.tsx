@@ -1,13 +1,12 @@
 
-"use client";
 import React from "react";
 import { WavyBackground } from "../ui/wavy-background";
 import { MovingBorderDemo } from "./MovingBorder";
 
-export function WavyBackgroundDemo() {
+export function MainPage() {
   return (
     <WavyBackground className="max-w-4xl mx-auto pb-40 text-center">
-        <MovingBorderDemo />
+      <MovingBorderDemo />
       <p className="text-2xl md:text-4xl lg:text-7xl text-white font-bold inter-var text-center">
         The Weather App
       </p>

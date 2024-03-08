@@ -33,7 +33,7 @@ export type WeatherData = {
     id: number;
     name: string;
     cod: number;
-  };
+  };https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric
   
   type WeatherDescription = {
     id: number;
@@ -42,3 +42,9 @@ export type WeatherData = {
     icon?: string; // Optional, if the API provides icon information
   };
   
+
+export type cityName = {
+  name: string,
+  state: string,
+  country: string,
+}

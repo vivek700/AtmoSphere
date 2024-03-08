@@ -1,4 +1,4 @@
-import { WavyBackgroundDemo } from "./components/weather/main";
+import { MainPage } from "./components/weatherPage/MainPage";
 
 
 
@@ -6,7 +6,7 @@ export default function Home() {
 
   return (
     <main >
-      <WavyBackgroundDemo />
+      <MainPage />
     </main>
   );
 }
