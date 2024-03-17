@@ -16,7 +16,7 @@ const WeatherInfo = () => {
     const { locError } = useWeatherData()
 
 
-    console.log(weatherData);
+    // console.log(weatherData);
 
 
 
