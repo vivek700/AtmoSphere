@@ -1,5 +1,13 @@
-import Forecast from "../components/weatherPage/weatherInfoPage/Forecast";
+import { Metadata } from "next";
 import WeatherInfo from "../components/weatherPage/weatherInfoPage/WeatherInfo";
+
+
+
+export const metadata: Metadata = {
+  title: "Weather and Forecast",
+  description: "Get instant, hyperlocal weather updates tailored to your exact location."
+}
+
 
 
 const Page = () => {

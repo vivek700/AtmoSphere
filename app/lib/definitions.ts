@@ -1,50 +1,86 @@
 export type WeatherData = {
-    coord: {
-      lon: number;
-      lat: number;
-    };
-    weather: WeatherDescription[];
-    base: string;
-    main: {
-      temp: number;
-      feels_like: number;
-      temp_min: number;
-      temp_max: number;
-      pressure: number;
-      humidity: number;
-    };
-    visibility: number;
-    wind: {
-      speed: number;
-      deg: number;
-    };
-    clouds: {
-      all: number;
-    };
-    dt: number;
-    sys: {
-      type: number;
-      id: number;
-      country: string;
-      sunrise: number;
-      sunset: number;
-    };
-    timezone: number;
-    id: number;
-    name: string;
-    cod: number;
-  };https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric
-  
-  type WeatherDescription = {
-    id: number;
-    main: string;
-    description: string;
-    icon?: string; // Optional, if the API provides icon information
-  };
-  
+  id: string
+  country: string
+  cityName: string
+  state: string
+  current: CurrentWeatherData
+  daily: DailyWeatherData[]
+  hourly: HourlyWeatherData[]
+}
 
-export type cityName = {
-  name: string,
-  state: string,
-  country: string,
+export type CurrentWeatherData = {
+  id: string
+  icon: string
+  main: string
+  clouds: number
+  dew_point: number
+  time: string
+  feels_like: number
+  humidity: number
+  pressure: number
+  temp: number
+  uvi: number
+  visibility: number
+  wind_speed: string
+  wind_deg: number
+
+}
+
+export type DailyWeatherData = {
+  id: string
+  icon: string
+  description: string
+  clouds: number
+  dew_point: number
+  time: string
+  feels_like: {
+    day: number
+    eve: number
+    morn: number
+    night: number
+
+  }
+  humidity: number
+  temp: {
+    day: number
+    eve: number
+    max: number
+    min: number
+    morn: number
+    night: number
+
+  }
+  pop: number
+  pressure: number
+  uvi: number
+  visibility: number
+  wind_speed: string
+  wind_deg: number
+  sunrise: string
+  sunset: string
+
+}
+
+export type HourlyWeatherData = {
+
+  id: string
+  clouds: number
+  time: string
+  temp: number
+  wind_speed: string
+  pop: string
+  description: string
+
+}
+
+
+export type LocationData = {
+  name: string
+  country: string
+  state: string
+}
+export type TimeData = {
+  timeWithDate: string
+  time: string
+  hours: string
 }

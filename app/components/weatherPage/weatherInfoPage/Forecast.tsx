@@ -1,4 +1,5 @@
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ZAxis, ResponsiveContainer, Label, LabelList, ComposedChart, Bar } from 'recharts'
+import { HourlyWeatherData } from '@/app/lib/definitions';
+import { Line, XAxis, YAxis, Tooltip, ZAxis, ResponsiveContainer, LabelList, ComposedChart, Bar } from 'recharts'
 
 
 
@@ -9,16 +10,14 @@ const CustomAxisTick = (props: any) => {
 
     const { x, y, payload } = props
 
-    const value = payload?.value
-
-
+    const labelParts = payload.value.split(' ');
 
 
     return (
 
 
-        <text x={x} y={y + 8} fill='#ccc' textAnchor="middle" dominantBaseline="middle"   >
-            {value}
+        <text x={x} y={y + 8} fill='#ccc' textAnchor="middle" dominantBaseline="middle">
+            {labelParts[0]}<tspan x={x} dy={18}>{labelParts[1]}</tspan>
         </text>
 
 
@@ -32,7 +31,11 @@ const CustomAxisTick = (props: any) => {
 
 
 
-const Forecast = ({ data }: { data: any }) => {
+const Forecast = ({ hourly }: { hourly: HourlyWeatherData[] }) => {
+
+    // console.log(hourly)
+
+
 
 
 
@@ -55,23 +58,23 @@ const Forecast = ({ data }: { data: any }) => {
     return (
         <>
 
-            <section className="min-w-[280rem]">
+            <section className="min-w-[220rem]">
 
                 <ResponsiveContainer minWidth={200} minHeight={350}  >
-                    {/* <LineChart data={data} */}
-                    <ComposedChart data={data}
-                        margin={{ top: 50, right: 5, left: 5, bottom: 30, }} >
-                        <Line type={"monotone"} dataKey={"temp"} dot={false} stroke="#8884d8" strokeWidth={3} >
+                    <ComposedChart data={hourly}
+                        margin={{ top: 50, right: 5, left: 5, bottom: 50, }} >
+                        <Line type={"monotone"} dataKey={"temp"} dot={false} stroke="#8884d8" strokeWidth={2} >
                         </Line>
+                        <Tooltip />
 
-                        <XAxis xAxisId={data?.id} tick={<CustomAxisTick />} tickMargin={5} dataKey={"weather"} type='category' interval={"preserveStart"} tickCount={5} tickSize={12} padding={{ left: 0, right: 0, }} />
+                        <XAxis tick={<CustomAxisTick />} tickMargin={5} dataKey={"description"} type='category' interval={0} tickCount={5} tickSize={12} padding={{ left: 0, right: 0, }} />
 
                         <YAxis dataKey={"temp"} stroke='#F88379' padding={{ top: 25, bottom: 30, }} axisLine={false} tickLine={false} unit={"°"} interval={"preserveStart"} scale={"linear"} domain={[15, "auto"]} />
 
-                        <Bar xAxisId={data?.id} dataKey={""}   >
+                        <Bar dataKey={""}   >
                             <LabelList dataKey={"pop"} content={renderCustomizedLabel} />
-                            <LabelList dataKey={"dt"} position={"top"} offset={210} />
-                            <LabelList dataKey={"wind_speed"} position={"bottom"} offset={70} />
+                            <LabelList dataKey={"time"} position={"top"} offset={210} />
+                            <LabelList dataKey={"wind_speed"} position={"bottom"} offset={95} />
                         </Bar>
                     </ComposedChart>
                 </ResponsiveContainer>

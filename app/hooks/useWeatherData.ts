@@ -1,11 +1,12 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { FetchData } from '@/app/lib/data'
+import { WeatherData } from '../lib/definitions'
 
 
 const useWeatherData = () => {
 
-    const [weatherData, setWeatherData] = useState<any>()
+    const [weatherData, setWeatherData] = useState<WeatherData>()
     const [locError, setLocError] = useState({ state: false, message: "" })
 
 
@@ -16,7 +17,7 @@ const useWeatherData = () => {
             const successCallback = async (position: any) => {
                 const latitude = position.coords.latitude
                 const longitude = position.coords.longitude
-                const data = await FetchData(latitude, longitude)
+                const data: WeatherData = await FetchData(latitude, longitude)
                 setWeatherData(data)
 
 
@@ -37,7 +38,7 @@ const useWeatherData = () => {
     }, [])
 
 
-    return [weatherData, locError]
+    return { weatherData, locError }
 
 
 }
