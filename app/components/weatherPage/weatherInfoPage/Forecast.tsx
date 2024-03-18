@@ -1,8 +1,5 @@
 import { HourlyWeatherData } from '@/app/lib/definitions';
-import { Line, XAxis, YAxis, Tooltip, ZAxis, ResponsiveContainer, LabelList, ComposedChart, Bar } from 'recharts'
-
-
-
+import { Line, XAxis, YAxis, ResponsiveContainer, LabelList, ComposedChart, Bar } from 'recharts'
 
 
 
@@ -32,10 +29,6 @@ const CustomAxisTick = (props: any) => {
 
 
 const Forecast = ({ hourly }: { hourly: HourlyWeatherData[] }) => {
-
-    // console.log(hourly)
-
-
 
 
 

@@ -79,59 +79,59 @@ export const FetchData = async (latitude: number, longitude: number) => {
 
 
 
-    function getNextEightDays() {
-        const today = new Date();
-        const nextEightDays = [];
+    // function getNextEightDays() {
+    //     const today = new Date();
+    //     const nextEightDays = [];
 
-        for (let i = 0; i < 8; i++) {
-            const nextDay = new Date(today);
-            nextDay.setDate(today.getDate() + i);
-            // Manually format the date to "day month" format
-            const formatted = `${nextDay.toLocaleString('en-US', {
-                weekday: 'short',
-                month: 'short',
-                day: 'numeric'
-            })}`;
-            // console.log(formatted);
-            nextEightDays.push(formatted);
-        }
+    //     for (let i = 0; i < 8; i++) {
+    //         const nextDay = new Date(today);
+    //         nextDay.setDate(today.getDate() + i);
+    //         // Manually format the date to "day month" format
+    //         const formatted = `${nextDay.toLocaleString('en-US', {
+    //             weekday: 'short',
+    //             month: 'short',
+    //             day: 'numeric'
+    //         })}`;
+    //         // console.log(formatted);
+    //         nextEightDays.push(formatted);
+    //     }
 
-        return nextEightDays;
-    }
-
-
-
-
-
-    function convertUnixTo12hFormat(unixTimestamp: number, timeZoneOffset: number): TimeData {
-
-        const date = new Date(unixTimestamp * 1000); // Convert timestamp to Date object
-        date.setTime(date.getTime() + timeZoneOffset)
-        const hours = date.getHours() % 12 || 12;  // Adjust for 12-hour format
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-        const amPm = date.getHours() < 12 ? 'am' : 'pm';
-
-        const formattedTime = date.toLocaleTimeString("en-IN", {
-            day: "numeric",
-            month: "short",
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true,
-        });
+    //     return nextEightDays;
+    // }
 
 
 
 
 
-        const timedata: TimeData = {
-            timeWithDate: formattedTime,
-            time: `${hours}:${minutes}${amPm}`,
-            hours: `${hours}${amPm}`
-        }
+    // function convertUnixTo12hFormat(unixTimestamp: number, timeZoneOffset: number): TimeData {
 
-        // console.log(timeZoneOffset)
-        return timedata;
-    }
+    //     const date = new Date(unixTimestamp * 1000); // Convert timestamp to Date object
+    //     date.setTime(date.getTime() + timeZoneOffset)
+    //     const hours = date.getHours() % 12 || 12;  // Adjust for 12-hour format
+    //     const minutes = date.getMinutes().toString().padStart(2, '0');
+    //     const amPm = date.getHours() < 12 ? 'am' : 'pm';
+
+    //     const formattedTime = date.toLocaleTimeString("en-IN", {
+    //         day: "numeric",
+    //         month: "short",
+    //         hour: "numeric",
+    //         minute: "numeric",
+    //         hour12: true,
+    //     });
+
+
+
+
+
+    //     const timedata: TimeData = {
+    //         timeWithDate: formattedTime,
+    //         time: `${hours}:${minutes}${amPm}`,
+    //         hours: `${hours}${amPm}`
+    //     }
+
+    //     // console.log(timeZoneOffset)
+    //     return timedata;
+    // }
 
 
 
@@ -180,7 +180,7 @@ export const FetchData = async (latitude: number, longitude: number) => {
 
     const currentData: CurrentWeatherData = {
         id: uuidv4(),
-        time: convertUnixTo12hFormat(weather.current.dt, weather.timezone_offset)?.timeWithDate,
+        dt: weather.current.dt,
         icon: weather.current.weather[0].icon,
         main: weather.current.weather[0].main,
         temp: roundOff(weather.current.temp),
@@ -193,6 +193,7 @@ export const FetchData = async (latitude: number, longitude: number) => {
         wind_deg: weather.current.wind_deg,
         feels_like: roundOff(weather.current.feels_like),
         clouds: weather.current.clouds,
+        time: ""
 
     }
 
@@ -202,7 +203,7 @@ export const FetchData = async (latitude: number, longitude: number) => {
         description: data.weather[0].description,
         clouds: data.clouds,
         dew_point: roundOff(data.dew_point),
-        time: getNextEightDays()[i],
+        dt: data.dt,
         humidity: data.humidity,
         pop: rainPercentage(data.pop),
         uvi: data.uvi,
@@ -224,19 +225,23 @@ export const FetchData = async (latitude: number, longitude: number) => {
             night: roundOff(data.temp.night)
         },
         wind_speed: windSpeed(data?.wind_speed),
-        sunrise: convertUnixTo12hFormat(data.sunrise, weather.timezone_offset)?.time,
-        sunset: convertUnixTo12hFormat(data.sunset, weather.timezone_offset)?.time
+        sunriseT: data.sunrise,
+        sunsetT: data.sunset,
+        sunrise: "",
+        sunset: "",
+        time: ""
 
     }))
 
     const hourly: HourlyWeatherData[] = weather.hourly.map((data: any) => ({
         id: uuidv4(),
         clouds: data.clouds,
-        time: convertUnixTo12hFormat(data.dt, weather.timezone_offset)?.hours,
+        dt: data.dt,
         temp: roundOff(data.temp),
         wind_speed: windSpeed(data.wind_speed),
         pop: `${rainPercentage(data.pop)}%`,
-        description: data.weather[0].description
+        description: data.weather[0].description,
+        time: ""
     }))
 
 

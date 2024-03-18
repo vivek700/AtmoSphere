@@ -3,7 +3,8 @@ import useWeatherData from "@/app/hooks/useWeatherData";
 import Forecast from "./Forecast";
 import Styles from '@/app/weather/home.module.css';
 import ForecastSideBar from "./ForecastSideBar";
-import { WeatherData } from "@/app/lib/definitions";
+import { DailyWeatherData, HourlyWeatherData, WeatherData } from "@/app/lib/definitions";
+import useTimeDate from "@/app/hooks/useTimeDate";
 
 
 
@@ -15,9 +16,14 @@ const WeatherInfo = () => {
 
     const { locError } = useWeatherData()
 
+    const [convertUnixTo12hFormat] = useTimeDate()
 
-    console.log(weatherData);
 
+
+
+    // console.log(weatherData);
+
+    const time = convertUnixTo12hFormat(weatherData?.current.dt, weatherData?.timezone_offset).timeWithDate
 
 
     const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
@@ -29,8 +35,15 @@ const WeatherInfo = () => {
     const finalVisibility = parseFloat(visibilityInKm.toFixed(1))
 
 
+    const hourlyData = weatherData?.hourly.map((data: HourlyWeatherData) => ({
+        ...data, time: convertUnixTo12hFormat(data.dt, weatherData.timezone_offset).hours
+    }))
 
-
+    const dailyData = weatherData?.daily.map((data: DailyWeatherData) => ({
+        ...data, time: convertUnixTo12hFormat(data.dt, weatherData.timezone_offset).date,
+        sunrise: convertUnixTo12hFormat(data.sunriseT, weatherData.timezone_offset).time,
+        sunset: convertUnixTo12hFormat(data.sunsetT, weatherData.timezone_offset).time
+    }))
 
 
 
@@ -40,7 +53,7 @@ const WeatherInfo = () => {
                 locError.state ? <h1 className='text-red-600'>{locError.message}</h1> : <>
                     <div className="flex flex-col md:flex-row">
                         <section className=" flex-1 ">
-                            <p className=" text-red-400">{weatherData?.current.time}</p>
+                            <p className=" text-red-400">{time}</p>
                             <p className="md:text-2xl sm:text-lime-300xl py-1  md:mb-6 text-neutral-200">
                                 {weatherData?.cityName}, {weatherData?.country}
                             </p>
@@ -64,14 +77,14 @@ const WeatherInfo = () => {
 
 
                         <section className=" overflow-hidden flex-1 text-neutral-300">
-                            <ForecastSideBar daily={weatherData?.daily} />
+                            <ForecastSideBar daily={dailyData} />
                         </section>
                     </div>
 
                     <p className='text-neutral-300 text-2xl pt-5 ' >Hourly forecast</p>
 
                     <section className={`overflow-x-auto w-full ${Styles.scroll_div}`}>
-                        <Forecast hourly={weatherData?.hourly} />
+                        <Forecast hourly={hourlyData} />
                     </section>
                 </>
 

@@ -1,7 +1,5 @@
-'use client'
 
 import { BackgroundGradient } from "@/app/components/ui/background-gradient";
-import { Metadata } from "next";
 
 
 const Layout = ({ children }: { children: React.ReactNode }) => {

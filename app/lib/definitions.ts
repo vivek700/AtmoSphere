@@ -15,6 +15,7 @@ export type CurrentWeatherData = {
   main: string
   clouds: number
   dew_point: number
+  dt: number
   time: string
   feels_like: number
   humidity: number
@@ -33,6 +34,7 @@ export type DailyWeatherData = {
   description: string
   clouds: number
   dew_point: number
+  dt: number
   time: string
   feels_like: {
     day: number
@@ -59,6 +61,8 @@ export type DailyWeatherData = {
   wind_deg: number
   sunrise: string
   sunset: string
+  sunriseT: number
+  sunsetT: number
 
 }
 
@@ -66,6 +70,7 @@ export type HourlyWeatherData = {
 
   id: string
   clouds: number
+  dt: number
   time: string
   temp: number
   wind_speed: string
@@ -84,4 +89,5 @@ export type TimeData = {
   timeWithDate: string
   time: string
   hours: string
+  date: string
 }
