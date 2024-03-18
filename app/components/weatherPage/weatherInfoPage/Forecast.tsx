@@ -42,10 +42,9 @@ const Forecast = ({ hourly }: { hourly: HourlyWeatherData[] }) => {
     const renderCustomizedLabel = (props: any) => {
         // console.log(props)
         const { x, y, width, height, value } = props;
-        const radius = 10;
 
         return (
-            <text x={x + width / 1.7} y={y + 10} fill='#6AE7BC' textAnchor="middle" dominantBaseline="middle">
+            <text x={x + width / 1.7} y={y + 20} fill='#6AE7BC' textAnchor="middle" dominantBaseline="middle">
                 {value}
             </text>
         )
@@ -65,7 +64,6 @@ const Forecast = ({ hourly }: { hourly: HourlyWeatherData[] }) => {
                         margin={{ top: 50, right: 5, left: 5, bottom: 50, }} >
                         <Line type={"monotone"} dataKey={"temp"} dot={false} stroke="#8884d8" strokeWidth={2} >
                         </Line>
-                        <Tooltip />
 
                         <XAxis tick={<CustomAxisTick />} tickMargin={5} dataKey={"description"} type='category' interval={0} tickCount={5} tickSize={12} padding={{ left: 0, right: 0, }} />
 

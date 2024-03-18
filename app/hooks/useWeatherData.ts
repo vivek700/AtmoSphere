@@ -15,8 +15,10 @@ const useWeatherData = () => {
         try {
 
             const successCallback = async (position: any) => {
-                const latitude = position.coords.latitude
-                const longitude = position.coords.longitude
+                const latitude: number = position.coords.latitude
+                const longitude: number = position.coords.longitude
+                // const latitude: number = 27.00092
+                // const longitude: number = 81.24365
                 const data: WeatherData = await FetchData(latitude, longitude)
                 setWeatherData(data)
 

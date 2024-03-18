@@ -103,14 +103,15 @@ export const FetchData = async (latitude: number, longitude: number) => {
 
 
 
-    function convertUnixTo12hFormat(unixTimestamp: number): TimeData {
+    function convertUnixTo12hFormat(unixTimestamp: number, timeZoneOffset: number): TimeData {
 
         const date = new Date(unixTimestamp * 1000); // Convert timestamp to Date object
+        date.setTime(date.getTime() + timeZoneOffset)
         const hours = date.getHours() % 12 || 12;  // Adjust for 12-hour format
         const minutes = date.getMinutes().toString().padStart(2, '0');
         const amPm = date.getHours() < 12 ? 'am' : 'pm';
 
-        const formattedTime = date.toLocaleTimeString("en-US", {
+        const formattedTime = date.toLocaleTimeString("en-IN", {
             day: "numeric",
             month: "short",
             hour: "numeric",
@@ -127,6 +128,8 @@ export const FetchData = async (latitude: number, longitude: number) => {
             time: `${hours}:${minutes}${amPm}`,
             hours: `${hours}${amPm}`
         }
+
+        // console.log(timeZoneOffset)
         return timedata;
     }
 
@@ -177,7 +180,7 @@ export const FetchData = async (latitude: number, longitude: number) => {
 
     const currentData: CurrentWeatherData = {
         id: uuidv4(),
-        time: convertUnixTo12hFormat(weather.current.dt)?.timeWithDate,
+        time: convertUnixTo12hFormat(weather.current.dt, weather.timezone_offset)?.timeWithDate,
         icon: weather.current.weather[0].icon,
         main: weather.current.weather[0].main,
         temp: roundOff(weather.current.temp),
@@ -198,7 +201,7 @@ export const FetchData = async (latitude: number, longitude: number) => {
         icon: data.weather[0].icon,
         description: data.weather[0].description,
         clouds: data.clouds,
-        dew_point: data.dew_point,
+        dew_point: roundOff(data.dew_point),
         time: getNextEightDays()[i],
         humidity: data.humidity,
         pop: rainPercentage(data.pop),
@@ -221,15 +224,15 @@ export const FetchData = async (latitude: number, longitude: number) => {
             night: roundOff(data.temp.night)
         },
         wind_speed: windSpeed(data?.wind_speed),
-        sunrise: convertUnixTo12hFormat(data.sunrise)?.time,
-        sunset: convertUnixTo12hFormat(data.sunset)?.time
+        sunrise: convertUnixTo12hFormat(data.sunrise, weather.timezone_offset)?.time,
+        sunset: convertUnixTo12hFormat(data.sunset, weather.timezone_offset)?.time
 
     }))
 
     const hourly: HourlyWeatherData[] = weather.hourly.map((data: any) => ({
         id: uuidv4(),
         clouds: data.clouds,
-        time: convertUnixTo12hFormat(data.dt)?.hours,
+        time: convertUnixTo12hFormat(data.dt, weather.timezone_offset)?.hours,
         temp: roundOff(data.temp),
         wind_speed: windSpeed(data.wind_speed),
         pop: `${rainPercentage(data.pop)}%`,
@@ -241,6 +244,7 @@ export const FetchData = async (latitude: number, longitude: number) => {
 
     const weatherInfo: WeatherData = {
         id: uuidv4(),
+        timezone_offset: weather.timezone_offset,
         cityName: locInfo.name,
         state: locInfo.state,
         country: locInfo.country,

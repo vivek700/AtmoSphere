@@ -1,5 +1,6 @@
 export type WeatherData = {
   id: string
+  timezone_offset: number
   country: string
   cityName: string
   state: string

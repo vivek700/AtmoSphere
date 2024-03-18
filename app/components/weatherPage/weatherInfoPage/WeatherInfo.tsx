@@ -45,7 +45,7 @@ const WeatherInfo = () => {
                                 {weatherData?.cityName}, {weatherData?.country}
                             </p>
                             <p className="text-5xl text-neutral-400">{weatherData?.current.temp}&#8451;</p>
-                            <p className="text-neutral-400 py-3">
+                            <p className="text-neutral-200 py-3">
                                 feels like {weatherData?.current.feels_like}&#8451;. {weatherData?.current?.main}.
                             </p>
                             <section className="text-neutral-400 px-5 flex gap-x-6 border-l border-red-400">

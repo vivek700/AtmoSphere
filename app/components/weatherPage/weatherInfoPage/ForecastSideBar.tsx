@@ -72,14 +72,14 @@ const ForecastSideBar = ({ daily }: { daily: DailyWeatherData[] }) => {
                         <p className="text-neutral-500">The high will be {info?.temp.max}&#8451;, the low will be {info?.temp.min}&#8451;.</p>
                     </section>
                     <section className="border-l border-red-400">
-                        <p >
-                            <span className="pl-8">{info?.pop}%</span>
+                        <p>
+                            <span className="pl-5">{info?.pop}%</span>
                             <span className="pl-8">{info?.wind_speed}</span>
                             <span className="pl-8">{info?.pressure}hPa</span>
                         </p>
                         <p className="whitespace-nowrap">
-                            <span className="pl-8">Humidity: {info?.humidity}</span>
-                            <span className="pl-8">UV: {info?.uvi}</span>
+                            <span className="pl-5">Humidity: {info?.humidity}%</span>
+                            <span className="pl-5">UV: {info?.uvi}</span>
                             <span className="pl-6 ">Dew point: {info?.dew_point}&#8451; </span>
                         </p>
                     </section>
