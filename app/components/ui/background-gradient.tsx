@@ -38,8 +38,6 @@ export const BackgroundGradient = ({
   }
 
 
-
-
   const variants = {
     initial: {
       backgroundPosition: "0 50%",
