@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/utils/cn";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export const BackgroundGradient = ({
@@ -15,6 +15,31 @@ export const BackgroundGradient = ({
   containerClassName?: string;
   animate?: boolean;
 }) => {
+
+
+  const [isMobile, setIsMobile] = useState(false)
+
+
+  useEffect(() => {
+    console.log("useEffect in background")
+    const query = window.matchMedia('(max-width: 768px)')
+
+    const handleResize = () => setIsMobile(query.matches)
+
+    query.addEventListener('change', handleResize)
+    handleResize()
+
+
+    return () => query.removeEventListener('change', handleResize)
+  }, [])
+
+  if (isMobile) {
+    animate = false
+  }
+
+
+
+
   const variants = {
     initial: {
       backgroundPosition: "0 50%",
