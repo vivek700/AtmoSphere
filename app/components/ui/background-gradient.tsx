@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { cn } from "@/utils/cn";
 import React, { useEffect, useState } from "react";
@@ -15,28 +15,22 @@ export const BackgroundGradient = ({
   containerClassName?: string;
   animate?: boolean;
 }) => {
-
-
-  const [isMobile, setIsMobile] = useState(false)
-
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    console.log("useEffect in background")
-    const query = window.matchMedia('(max-width: 768px)')
+    const query = window.matchMedia("(max-width: 768px)");
 
-    const handleResize = () => setIsMobile(query.matches)
+    const handleResize = () => setIsMobile(query.matches);
 
-    query.addEventListener('change', handleResize)
-    handleResize()
+    query.addEventListener("change", handleResize);
+    handleResize();
 
-
-    return () => query.removeEventListener('change', handleResize)
-  }, [])
+    return () => query.removeEventListener("change", handleResize);
+  }, []);
 
   if (isMobile) {
-    animate = false
+    animate = false;
   }
-
 
   const variants = {
     initial: {
@@ -55,10 +49,10 @@ export const BackgroundGradient = ({
         transition={
           animate
             ? {
-              duration: 5,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }
+                duration: 5,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }
             : undefined
         }
         style={{
@@ -76,10 +70,10 @@ export const BackgroundGradient = ({
         transition={
           animate
             ? {
-              duration: 5,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }
+                duration: 5,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }
             : undefined
         }
         style={{

@@ -2,9 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-  
-  body {
-   
-    background: hsl(0, 0%, 5%)
+/* Target the scrollbar */
+html::-webkit-scrollbar {
+  width: 5px; /* Change scrollbar width */
+}
 
-  }
+/* Style the scrollbar track */
+html::-webkit-scrollbar-track {
+  background: #f1f1f1 transparent; /* Set background color */
+}
+
+/* Style the scrollbar thumb */
+html::-webkit-scrollbar-thumb {
+  background: #888; /* Set thumb color */
+  border-radius: 5px; /* Add rounded corners */
+}
+
+body {
+  background: hsl(0, 0%, 5%);
+}
