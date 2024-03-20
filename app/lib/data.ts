@@ -206,7 +206,7 @@ export const FetchData = async (latitude: number, longitude: number) => {
         dt: data.dt,
         humidity: data.humidity,
         pop: rainPercentage(data.pop),
-        uvi: data.uvi,
+        uvi: roundOff(data.uvi),
         visibility: data.visibility,
         pressure: data.pressure,
         wind_deg: data.wind_deg,
