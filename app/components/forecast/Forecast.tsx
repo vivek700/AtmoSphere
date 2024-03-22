@@ -85,21 +85,23 @@ const Forecast = ({
               dataKey={"description"}
               type="category"
               interval={0}
-              tickCount={5}
               tickSize={12}
               padding={{ left: 0, right: 0 }}
             />
 
             <YAxis
               dataKey={"temp"}
+              type="number"
               stroke="#F88379"
               padding={{ top: 25, bottom: 30 }}
               axisLine={false}
               tickLine={false}
               unit={"°"}
+              // tickCount={5}
               interval={"preserveEnd"}
-              //   scale={"linear"}
-              domain={[15, "auto"]}
+              // scale={"linear"}
+              // includeHidden={true}
+              domain={["auto", "auto"]}
             />
 
             <Bar dataKey={""}>

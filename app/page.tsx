@@ -18,8 +18,6 @@ export default function Home() {
       const successCallback = async (position: any) => {
         const latitude: number = position.coords.latitude;
         const longitude: number = position.coords.longitude;
-        // const latitude: number = 27.00092
-        // const longitude: number = 81.24365
         setLocation({ long: longitude, lati: latitude });
       };
       const errorCallback = (error: any) => {

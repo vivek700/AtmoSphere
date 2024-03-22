@@ -1,28 +1,25 @@
 import CurrentWeatherInfo from "../components/CurrentWeatherInfo";
-import { FetchData } from "../lib/data";
+import { redirect } from "next/navigation";
 
-// export async function getData() {
-//   "use server";
-//   const data = await FetchData();
-//   console.log(data);
-//   return data;
-// }
-
-const Page = async ({ searchParams }: { searchParams: any }) => {
-  console.log(searchParams);
-
-  // const { locError } = useWeatherData();
-
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) => {
   const longitude: number = Number(searchParams.long);
   const latitude: number = Number(searchParams.lati);
 
   const message: string | boolean = searchParams.message || false;
 
-  console.log(longitude);
-  console.log(latitude);
-  console.log(message);
+  // console.log(longitude);
+  // console.log(latitude);
+  // console.log(message);
 
   // console.log(weatherData);
+
+  if (!longitude && !latitude && !message) {
+    redirect("/");
+  }
 
   return (
     <>

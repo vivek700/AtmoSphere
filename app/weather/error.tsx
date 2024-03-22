@@ -9,7 +9,7 @@ const Error = ({
   error: Error & { digest?: string };
   reset: () => void;
 }) => {
-  return <div>Error: {error.message}</div>;
+  return <div className="text-blue-800">Error: {error.message}</div>;
 };
 
 export default Error;

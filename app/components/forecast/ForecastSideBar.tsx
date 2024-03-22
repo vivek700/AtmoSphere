@@ -111,7 +111,7 @@ const ForecastSideBar = ({
           </section>
 
           <section className={`pt-6 overflow-x-auto  ${styles.scroll_div}`}>
-            <section className="pl-20 md:text-lg pr-3 flex justify-around">
+            <section className="pl-20  pr-3 flex justify-around">
               <p>Morning</p>
               <p>Afternoon</p>
               <p>Evening</p>
