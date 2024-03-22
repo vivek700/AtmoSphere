@@ -1,3 +1,5 @@
+"use client";
+import useTimeDate from "@/app/hooks/useTimeDate";
 import { HourlyWeatherData } from "@/app/lib/definitions";
 import {
   Line,
@@ -30,7 +32,20 @@ const CustomAxisTick = (props: any) => {
   );
 };
 
-const Forecast = ({ hourly }: { hourly: HourlyWeatherData[] }) => {
+const Forecast = ({
+  hourly,
+  timezone_offset,
+}: {
+  hourly: HourlyWeatherData[];
+  timezone_offset: number;
+}) => {
+  const [convertUnixTo12hFormat] = useTimeDate();
+
+  const hourlyData = hourly?.map((data: HourlyWeatherData) => ({
+    ...data,
+    time: convertUnixTo12hFormat(data.dt, timezone_offset).hours,
+  }));
+
   const renderCustomizedLabel = (props: any) => {
     // console.log(props)
     const { x, y, width, height, value } = props;
@@ -53,7 +68,7 @@ const Forecast = ({ hourly }: { hourly: HourlyWeatherData[] }) => {
       <section className="min-w-[220rem]">
         <ResponsiveContainer minWidth={200} minHeight={350}>
           <ComposedChart
-            data={hourly}
+            data={hourlyData}
             margin={{ top: 50, right: 5, left: 5, bottom: 50 }}
           >
             <Line

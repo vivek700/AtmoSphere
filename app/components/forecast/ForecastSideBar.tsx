@@ -3,8 +3,24 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "@/app/weather/home.module.css";
 import { DailyWeatherData } from "@/app/lib/definitions";
+import useTimeDate from "@/app/hooks/useTimeDate";
 
-const ForecastSideBar = ({ daily }: { daily: DailyWeatherData[] }) => {
+const ForecastSideBar = ({
+  dailyData,
+  timezone_offset,
+}: {
+  dailyData: DailyWeatherData[];
+  timezone_offset: number;
+}) => {
+  const [convertUnixTo12hFormat] = useTimeDate();
+
+  const daily = dailyData?.map((data: DailyWeatherData) => ({
+    ...data,
+    time: convertUnixTo12hFormat(data.dt, timezone_offset).date,
+    sunrise: convertUnixTo12hFormat(data.sunriseT, timezone_offset).time,
+    sunset: convertUnixTo12hFormat(data.sunsetT, timezone_offset).time,
+  }));
+
   // console.log(data)
 
   const navRef = useRef<HTMLMenuElement | null>(null);

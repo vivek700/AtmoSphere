@@ -1,8 +1,11 @@
 'use server'
-import fs from 'fs'
+
+import fs from 'fs';
 import { CurrentWeatherData, DailyWeatherData, HourlyWeatherData, LocationData, TimeData, WeatherData } from "./definitions"
 
 import { v4 as uuidv4 } from 'uuid'
+
+
 
 
 
@@ -45,9 +48,10 @@ const getWeatherData = async (latitude: number, longitude: number, apiKey: strin
     return data
 
 }
+// const latitude: number = 27.00092
+// const longitude: number = 81.24365
 
-
-export const FetchData = async (latitude: number, longitude: number) => {
+export const FetchData = async (latitude: number = 27.00092, longitude: number = 81.24365) => {
     const apiKey: string = process.env.API_KEY || ""
 
 
@@ -79,59 +83,7 @@ export const FetchData = async (latitude: number, longitude: number) => {
 
 
 
-    // function getNextEightDays() {
-    //     const today = new Date();
-    //     const nextEightDays = [];
 
-    //     for (let i = 0; i < 8; i++) {
-    //         const nextDay = new Date(today);
-    //         nextDay.setDate(today.getDate() + i);
-    //         // Manually format the date to "day month" format
-    //         const formatted = `${nextDay.toLocaleString('en-US', {
-    //             weekday: 'short',
-    //             month: 'short',
-    //             day: 'numeric'
-    //         })}`;
-    //         // console.log(formatted);
-    //         nextEightDays.push(formatted);
-    //     }
-
-    //     return nextEightDays;
-    // }
-
-
-
-
-
-    // function convertUnixTo12hFormat(unixTimestamp: number, timeZoneOffset: number): TimeData {
-
-    //     const date = new Date(unixTimestamp * 1000); // Convert timestamp to Date object
-    //     date.setTime(date.getTime() + timeZoneOffset)
-    //     const hours = date.getHours() % 12 || 12;  // Adjust for 12-hour format
-    //     const minutes = date.getMinutes().toString().padStart(2, '0');
-    //     const amPm = date.getHours() < 12 ? 'am' : 'pm';
-
-    //     const formattedTime = date.toLocaleTimeString("en-IN", {
-    //         day: "numeric",
-    //         month: "short",
-    //         hour: "numeric",
-    //         minute: "numeric",
-    //         hour12: true,
-    //     });
-
-
-
-
-
-    //     const timedata: TimeData = {
-    //         timeWithDate: formattedTime,
-    //         time: `${hours}:${minutes}${amPm}`,
-    //         hours: `${hours}${amPm}`
-    //     }
-
-    //     // console.log(timeZoneOffset)
-    //     return timedata;
-    // }
 
 
 
@@ -143,39 +95,6 @@ export const FetchData = async (latitude: number, longitude: number) => {
     //     const parsedData = JSON.parse(fileData.toString() || "{}");
     //     // console.log(parsedData);
 
-    //     const modData = parsedData.hourly.map((data: any) => ({ ...data, pop: `${data.pop}%`, weather: data.weather[0].description, id: data.weather[0].id, dt: convertUnixTo12hFormat(data.dt)?.hours, wind_speed: windSpeed(data.wind_speed), temp: roundOff(data.temp) }))
-    //     // console.log(modData)
-
-    //     const dailyModData = parsedData?.daily.map((data: any, i: number) => (
-    //         {
-    //             ...data, dt: getNextEightDays()[i], weather: data.weather[0].description, temp: {
-    //                 day: roundOff(data.temp.day),
-    //                 eve: roundOff(data.temp.eve),
-    //                 max: roundOff(data.temp.max),
-    //                 min: roundOff(data.temp.min),
-    //                 morn: roundOff(data.temp.morn),
-    //                 night: roundOff(data.temp.night)
-    //             },
-    //             feels_like: {
-    //                 day: roundOff(data.feels_like.day),
-    //                 eve: roundOff(data.feels_like.eve),
-    //                 morn: roundOff(data.feels_like.morn),
-    //                 night: roundOff(data.feels_like.night)
-
-    //             },
-    //             id: uuidv4(),
-    //             wind_speed: windSpeed(data?.wind_speed),
-    //             sunrise: convertUnixTo12hFormat(data.sunrise)?.time,
-    //             sunset: convertUnixTo12hFormat(data.sunset)?.time
-
-    //         }
-    //     ))
-
-
-    //     return { ...parsedData, hourly: modData, daily: dailyModData }
-    // } catch (err) {
-    //     console.error('Error reading file from disk:', err);
-    // }
 
 
     const currentData: CurrentWeatherData = {
@@ -272,10 +191,6 @@ export const FetchData = async (latitude: number, longitude: number) => {
     // })
 
 
-
-
-
-    // console.log({ ...weather, ...name })
     return weatherInfo
 }
 
