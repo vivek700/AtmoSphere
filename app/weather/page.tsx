@@ -21,7 +21,6 @@ const Page = async ({
   if (!longitude && !latitude && !message) {
     redirect("/");
   }
-
   return (
     <>
       {message ? (

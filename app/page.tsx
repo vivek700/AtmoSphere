@@ -13,35 +13,33 @@ export default function Home() {
 
   const router = useRouter();
 
-  useEffect(() => {
+  function handleGetLocation() {
     try {
-      const successCallback = (position: any) => {
-        const latitude: number = position.coords.latitude;
-        const longitude: number = position.coords.longitude;
-        setIsLoc((prev) => ({
-          ...prev,
-          long: longitude,
-          lati: latitude,
-        }));
+      const success = (position: GeolocationPosition) => {
+        const { latitude, longitude } = position.coords;
+        setIsLoc((prev) => ({ ...prev, long: longitude, lati: latitude }));
       };
-      const errorCallback = (error: any) => {
-        console.log(error);
-        setIsLoc((prev) => ({
-          ...prev,
-          error_message: error.message,
-        }));
+      const handleError = ({ message }: GeolocationPositionError) => {
+        setIsLoc((prev) => ({ ...prev, error_message: message }));
       };
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+      navigator.geolocation.getCurrentPosition(success, handleError);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  useEffect(() => {
+    handleGetLocation();
   }, []);
 
   function handleLocation() {
-    if (isLoc.long && isLoc.lati) {
-      router.push(`/weather?long=${isLoc.long}&lati=${isLoc.lati}`);
+    const { long, lati, error_message } = isLoc;
+    if (!long && !lati && !error_message) {
+      handleGetLocation();
     } else {
-      router.push(`/weather?message=${isLoc.error_message}`);
+      const query =
+        long && lati ? `long=${long}&lati=${lati}` : `message=${error_message}`;
+      router.push(`/weather?${query}`);
     }
   }
 
