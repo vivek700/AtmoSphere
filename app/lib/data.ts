@@ -1,6 +1,4 @@
 'use server'
-
-import fs from 'fs';
 import { CurrentWeatherData, DailyWeatherData, HourlyWeatherData, LocationData, TimeData, WeatherData } from "./definitions"
 
 import { v4 as uuidv4 } from 'uuid'
@@ -48,10 +46,11 @@ const getWeatherData = async (latitude: number, longitude: number, apiKey: strin
     return data
 
 }
-// const latitude: number = 27.00092
-// const longitude: number = 81.24365
+
 
 export const FetchData = async (latitude: number = 27.00092, longitude: number = 81.24365) => {
+
+
     const apiKey: string = process.env.API_KEY || ""
 
 
@@ -79,21 +78,6 @@ export const FetchData = async (latitude: number = 27.00092, longitude: number =
         const percentage = n * 100
         return Number(percentage.toFixed())
     }
-
-
-
-
-
-
-
-
-    // const filePath = `${process.cwd()}/app/lib/file.json`
-
-
-    // try {
-    //     const fileData = fs.readFileSync(filePath);
-    //     const parsedData = JSON.parse(fileData.toString() || "{}");
-    //     // console.log(parsedData);
 
 
 
@@ -177,18 +161,6 @@ export const FetchData = async (latitude: number = 27.00092, longitude: number =
         daily: daily
 
     }
-
-
-    // console.log(weather)
-
-
-    // fs.writeFile(filePath, JSON.stringify({ ...weatherInfo }), (err) => {
-    //     if (err) {
-    //         console.error(err)
-    //     } else {
-    //         console.log('JSON data saved successfully!')
-    //     }
-    // })
 
 
     return weatherInfo

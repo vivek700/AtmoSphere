@@ -12,12 +12,6 @@ const Page = async ({
 
   const message: string | boolean = searchParams.message || false;
 
-  // console.log(longitude);
-  // console.log(latitude);
-  // console.log(message);
-
-  // console.log(weatherData);
-
   if (!longitude && !latitude && !message) {
     redirect("/");
   }

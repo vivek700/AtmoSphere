@@ -1,7 +1,12 @@
 import React from "react";
+import Skeletons from "../components/ui/Skeletons";
 
 const Loading = () => {
-  return <div className="text-white text-2xl">Loading...</div>;
+  return (
+    <>
+      <Skeletons />
+    </>
+  );
 };
 
 export default Loading;

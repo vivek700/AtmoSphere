@@ -2,7 +2,6 @@ import { FetchData } from "../lib/data";
 import { WeatherData } from "../lib/definitions";
 import ForecastSideBar from "./forecast/ForecastSideBar";
 import Styles from "../weather/home.module.css";
-import { Suspense } from "react";
 import Forecast from "./forecast/Forecast";
 import TimeAndDate from "./TimeAndDate";
 
@@ -30,7 +29,7 @@ const CurrentWeatherInfo = async ({
             dt={weatherData?.current.dt}
             timezone_offset={weatherData.timezone_offset}
           />
-          <p className="md:text-2xl sm:text-lime-300xl py-1  md:mb-6 text-neutral-200">
+          <p className="text-2xl sm:text-lime-300xl py-1  md:mb-5 text-neutral-200">
             {weatherData?.cityName}, {weatherData?.country}
           </p>
           <p className="text-5xl text-neutral-400">
@@ -40,20 +39,18 @@ const CurrentWeatherInfo = async ({
             feels like {weatherData?.current.feels_like}&#8451;.{" "}
             {weatherData?.current?.main}.
           </p>
-          <section className="text-neutral-400 px-5 flex gap-x-6 border-l border-red-400">
+          <section className="text-neutral-400 pl-5 flex gap-x-6 border-l border-red-400">
             <section>
-              <p className="md:py-1">{windDir}</p>
-              <p className="md:py-1">
+              <p>{windDir}</p>
+              <p className="md:my-1">
                 Humidity: {weatherData?.current?.humidity}%
               </p>
-              <p className="md:py-1">
-                Dew Point: {weatherData?.current.dew_point}&#8451;
-              </p>
+              <p>Dew Point: {weatherData?.current.dew_point}&#8451;</p>
             </section>
             <section>
-              <p className="md:py-1">{weatherData?.current?.pressure} hPa</p>
-              <p className="md:py-1">UV: {weatherData?.current.uvi} </p>
-              <p className="md:py-1">Visibility: {finalVisibility}km</p>
+              <p>{weatherData?.current?.pressure} hPa</p>
+              <p className="md:my-1">UV: {weatherData?.current.uvi} </p>
+              <p>Visibility: {finalVisibility}km</p>
             </section>
           </section>
         </section>
@@ -69,12 +66,10 @@ const CurrentWeatherInfo = async ({
       <p className="text-neutral-300 text-2xl pt-5 ">Hourly forecast</p>
 
       <section className={`overflow-x-auto w-full ${Styles.scroll_div}`}>
-        <Suspense fallback={<p className="text-red-400">forecasting.....</p>}>
-          <Forecast
-            hourly={weatherData?.hourly}
-            timezone_offset={weatherData?.timezone_offset}
-          />
-        </Suspense>
+        <Forecast
+          hourly={weatherData?.hourly}
+          timezone_offset={weatherData?.timezone_offset}
+        />
       </section>
     </>
   );
