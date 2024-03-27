@@ -4,18 +4,18 @@ const Skeletons = () => {
       <div className="flex flex-col animate-pulse md:flex-row  rounded-xl">
         <section className=" flex-1 ">
           <p className="h-5 w-28 bg-zinc-800 rounded"></p>
-          <p className="h-8 w-36 mt-3 mb-3 md:mb-4 bg-zinc-800 rounded"></p>
+          <p className="h-8 w-36 mt-1 mb-2 md:mb-6 bg-zinc-800 rounded"></p>
           <p className="h-11 w-24 bg-zinc-800 rounded"></p>
-          <p className="h-5 w-36 mt-4 bg-zinc-800 rounded"></p>
+          <p className="h-5 w-36 mt-3 md:mt-4 bg-zinc-800 rounded"></p>
           <section className="text-neutral-400 my-5 px-5 flex gap-x-6 border-l border-red-500">
             <section>
               <p className=" h-4 w-16  md:my-0 bg-zinc-800 rounded"></p>
-              <p className=" h-4 w-24 my-2 md:my-4 bg-zinc-800 rounded"></p>
+              <p className=" h-4 w-24 my-3 md:my-4 bg-zinc-800 rounded"></p>
               <p className=" h-4 w-32  md:my-0 bg-zinc-800 rounded"></p>
             </section>
             <section>
               <p className=" h-4 w-16 md:my-0 bg-zinc-800 rounded"></p>
-              <p className=" h-4 w-12 my-2 md:my-4 bg-zinc-800 rounded"></p>
+              <p className=" h-4 w-12 my-3 md:my-4 bg-zinc-800 rounded"></p>
               <p className=" h-4 w-24 md:my-0 bg-zinc-800 rounded"></p>
             </section>
           </section>
