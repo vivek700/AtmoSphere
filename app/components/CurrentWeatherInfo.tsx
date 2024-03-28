@@ -4,6 +4,8 @@ import ForecastSideBar from "./forecast/ForecastSideBar";
 import Styles from "../weather/home.module.css";
 import Forecast from "./forecast/Forecast";
 import TimeAndDate from "./TimeAndDate";
+import Icon from "./Icon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CurrentWeatherInfo = async ({
   latitude,
@@ -13,6 +15,8 @@ const CurrentWeatherInfo = async ({
   longitude: number;
 }) => {
   const weatherData: WeatherData = await FetchData(latitude, longitude);
+
+  const icon = weatherData?.current?.icon;
 
   const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
   const index = Math.round((weatherData?.current?.wind_deg % 360) / 45) % 8;
@@ -32,9 +36,15 @@ const CurrentWeatherInfo = async ({
           <p className="text-2xl sm:text-lime-300xl py-1  md:mb-5 text-neutral-200">
             {weatherData?.cityName}, {weatherData?.country}
           </p>
-          <p className="text-5xl text-neutral-400">
-            {weatherData?.current.temp}&#8451;
-          </p>
+          <div className="flex gap-x-2">
+            <FontAwesomeIcon
+              icon={Icon(icon)}
+              className="w-9 h-12 text-neutral-400"
+            />
+            <p className="text-5xl text-neutral-400">
+              {weatherData?.current.temp}&#8451;
+            </p>
+          </div>
           <p className="text-neutral-200 py-3">
             feels like {weatherData?.current.feels_like}&#8451;.{" "}
             {weatherData?.current?.main}.

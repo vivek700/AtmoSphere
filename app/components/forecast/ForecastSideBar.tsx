@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import styles from "@/app/weather/home.module.css";
 import { DailyWeatherData } from "@/app/lib/definitions";
 import useTimeDate from "@/app/hooks/useTimeDate";
+import Icon from "../Icon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ForecastSideBar = ({
   dailyData,
@@ -56,7 +58,11 @@ const ForecastSideBar = ({
       className="flex rounded h-11 border-radius cursor-pointer hover:bg-neutral-800 text-sm md:text-base "
     >
       <li className="py-2 flex-1 pl-2">{info?.time}</li>
-      <li className="py-2 flex-1">
+      <li className="py-2 flex-1 flex gap-x-1">
+        <FontAwesomeIcon
+          icon={Icon(info?.icon)}
+          className="w-8 h-6 text-neutral-400"
+        />
         {`${info?.temp.max} / ${info?.temp.min}`}&#8451;
       </li>
       <li className=" py-1 pr-2 max-w-20 text-center text-xs">
@@ -86,14 +92,20 @@ const ForecastSideBar = ({
     if (info?.id === checkId) {
       return (
         <section key={info?.id} className="text-sm md:text-base">
-          <section className="py-6">
-            <p className="text-lg text-neutral-300">
-              {capitalizeFirstLetter(info?.description)}.
-            </p>
-            <p className="text-neutral-500">
-              The high will be {info?.temp.max}&#8451;, the low will be{" "}
-              {info?.temp.min}&#8451;.
-            </p>
+          <section className="py-6 flex gap-x-3">
+            <FontAwesomeIcon
+              icon={Icon(info?.icon)}
+              className="w-11 h-12 text-neutral-400"
+            />
+            <div>
+              <p className="text-lg text-neutral-300">
+                {capitalizeFirstLetter(info?.description)}.
+              </p>
+              <p className="text-neutral-500">
+                The high will be {info?.temp.max}&#8451;, the low will be{" "}
+                {info?.temp.min}&#8451;.
+              </p>
+            </div>
           </section>
           <section className="border-l border-red-400">
             <p>

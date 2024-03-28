@@ -50,8 +50,6 @@ const getWeatherData = async (latitude: number, longitude: number, apiKey: strin
 
 export const FetchData = async (latitude: number = 27.00092, longitude: number = 81.24365) => {
 
-
-
     const apiKey: string = process.env.API_KEY || ""
 
 
@@ -59,8 +57,6 @@ export const FetchData = async (latitude: number = 27.00092, longitude: number =
     const weatherData = getWeatherData(latitude, longitude, apiKey)
 
     const [weather, locInfo] = await Promise.all([weatherData, locData])
-
-
 
 
 
