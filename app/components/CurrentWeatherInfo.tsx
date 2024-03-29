@@ -6,7 +6,8 @@ import Forecast from "./forecast/Forecast";
 import TimeAndDate from "./TimeAndDate";
 import { Icon } from "../lib/Icon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRocket } from "@fortawesome/free-solid-svg-icons";
+import { faRocket, faLocationArrow } from "@fortawesome/free-solid-svg-icons";
+import WindDir from "./WindDir";
 
 const CurrentWeatherInfo = async ({
   latitude,
@@ -18,10 +19,6 @@ const CurrentWeatherInfo = async ({
   const weatherData: WeatherData = await FetchData(latitude, longitude);
 
   const icon = weatherData?.current?.icon;
-
-  const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-  const index = Math.round((weatherData?.current?.wind_deg % 360) / 45) % 8;
-  const windDir = `${weatherData?.current.wind_speed} ${directions[index]}`;
 
   const visibilityInKm = weatherData?.current?.visibility / 1000;
   const finalVisibility = parseFloat(visibilityInKm.toFixed(1));
@@ -52,7 +49,12 @@ const CurrentWeatherInfo = async ({
           </p>
           <section className="text-neutral-400 pl-5 flex gap-x-6 border-l border-red-400">
             <section>
-              <p>{windDir}</p>
+              <p>
+                <WindDir
+                  deg={weatherData?.current.wind_deg}
+                  wind_speed={weatherData?.current.wind_speed}
+                />
+              </p>
               <p className="md:my-1">
                 Humidity: {weatherData?.current?.humidity}%
               </p>

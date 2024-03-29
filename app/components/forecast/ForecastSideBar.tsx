@@ -7,6 +7,7 @@ import useTimeDate from "@/app/hooks/useTimeDate";
 import { Icon } from "../../lib/Icon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudRain, faRocket } from "@fortawesome/free-solid-svg-icons";
+import WindDir from "../WindDir";
 
 const ForecastSideBar = ({
   dailyData,
@@ -24,7 +25,7 @@ const ForecastSideBar = ({
     sunset: convertUnixTo12hFormat(data.sunsetT, timezone_offset).time,
   }));
 
-  // console.log(data)
+  // console.log(daily);
 
   const navRef = useRef<HTMLMenuElement | null>(null);
   const [pressed, setPressed] = useState(false);
@@ -112,7 +113,9 @@ const ForecastSideBar = ({
             <p>
               <FontAwesomeIcon className="pl-5 pr-1" icon={faCloudRain} />
               <span>{info?.pop}%</span>
-              <span className="pl-8">{info?.wind_speed}</span>
+              <span className="pl-8">
+                <WindDir deg={info?.wind_deg} wind_speed={info?.wind_speed} />
+              </span>
               <FontAwesomeIcon
                 className="pl-8 pr-1"
                 icon={faRocket}

@@ -1,6 +1,5 @@
 import {
   faCircle,
-  faBarsStaggered,
   faCloud,
   faCloudSun,
   faCloudMoon,
@@ -11,16 +10,19 @@ import {
   faCloudBolt,
   faSnowflake,
   faSun,
+  faTemperatureArrowDown,
+  faTemperatureArrowUp,
+  faTemperatureHalf,
 } from "@fortawesome/free-solid-svg-icons";
 
 export function Icon(iconStr: string) {
   let iconName;
   switch (iconStr) {
     case "50d":
-      iconName = faBarsStaggered;
+      iconName = faTemperatureArrowUp;
       break;
     case "50n":
-      iconName = faBarsStaggered;
+      iconName = faTemperatureArrowDown;
       break;
     case "01d":
       iconName = faSun;
@@ -72,7 +74,7 @@ export function Icon(iconStr: string) {
       break;
 
     default:
-      iconName = faBarsStaggered;
+      iconName = faTemperatureHalf;
   }
   return iconName;
 }
