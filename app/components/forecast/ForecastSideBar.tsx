@@ -4,8 +4,9 @@ import { useState, useRef, useEffect } from "react";
 import styles from "@/app/weather/home.module.css";
 import { DailyWeatherData } from "@/app/lib/definitions";
 import useTimeDate from "@/app/hooks/useTimeDate";
-import Icon from "../Icon";
+import { Icon } from "../../lib/Icon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCloudRain, faRocket } from "@fortawesome/free-solid-svg-icons";
 
 const ForecastSideBar = ({
   dailyData,
@@ -109,9 +110,15 @@ const ForecastSideBar = ({
           </section>
           <section className="border-l border-red-400">
             <p>
-              <span className="pl-5">{info?.pop}%</span>
+              <FontAwesomeIcon className="pl-5 pr-1" icon={faCloudRain} />
+              <span>{info?.pop}%</span>
               <span className="pl-8">{info?.wind_speed}</span>
-              <span className="pl-8">{info?.pressure}hPa</span>
+              <FontAwesomeIcon
+                className="pl-8 pr-1"
+                icon={faRocket}
+                size="xs"
+              />
+              <span>{info?.pressure}hPa</span>
             </p>
             <p className="whitespace-nowrap">
               <span className="pl-5">Humidity: {info?.humidity}%</span>

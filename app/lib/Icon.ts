@@ -13,7 +13,7 @@ import {
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Icon(iconStr: string) {
+export function Icon(iconStr: string) {
   let iconName;
   switch (iconStr) {
     case "50d":

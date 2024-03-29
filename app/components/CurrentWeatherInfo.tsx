@@ -4,8 +4,9 @@ import ForecastSideBar from "./forecast/ForecastSideBar";
 import Styles from "../weather/home.module.css";
 import Forecast from "./forecast/Forecast";
 import TimeAndDate from "./TimeAndDate";
-import Icon from "./Icon";
+import { Icon } from "../lib/Icon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRocket } from "@fortawesome/free-solid-svg-icons";
 
 const CurrentWeatherInfo = async ({
   latitude,
@@ -58,7 +59,16 @@ const CurrentWeatherInfo = async ({
               <p>Dew Point: {weatherData?.current.dew_point}&#8451;</p>
             </section>
             <section>
-              <p>{weatherData?.current?.pressure} hPa</p>
+              <p>
+                <span>
+                  <FontAwesomeIcon
+                    icon={faRocket}
+                    size="sm"
+                    className=" pr-1 inline-block w-3"
+                  />
+                </span>
+                {weatherData?.current?.pressure} hPa
+              </p>
               <p className="md:my-1">UV: {weatherData?.current.uvi} </p>
               <p>Visibility: {finalVisibility}km</p>
             </section>
