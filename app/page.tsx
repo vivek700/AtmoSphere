@@ -50,7 +50,7 @@ export default function Home() {
         <button
           type="button"
           onClick={handleLocation}
-          className="mb-4 space-x-2 text-white font-semibold hover:scale-110 transition-all duration-300 ease-in-out bg-cyan-500 px-5 py-3 rounded-full hover:text-cyan-500 hover:bg-black shadow-lg shadow-cyan-500/50"
+          className="mb-4 space-x-2 text-white font-semibold hover:scale-110 transition-all duration-300 ease-in-out bg-cyan-500 px-5 py-3 rounded-full hover:text-cyan-500 hover:bg-black shadow-lg shadow-cyan-500/50 focus:outline-none focus:ring focus:ring-cyan-300"
         >
           <p>Get Started</p>
         </button>
