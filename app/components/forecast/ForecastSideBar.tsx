@@ -6,7 +6,12 @@ import { DailyWeatherData } from "@/app/lib/definitions";
 import useTimeDate from "@/app/hooks/useTimeDate";
 import { Icon } from "../../lib/Icon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloudRain, faRocket } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCaretDown,
+  faCaretUp,
+  faCloudRain,
+  faRocket,
+} from "@fortawesome/free-solid-svg-icons";
 import WindDir from "../WindDir";
 
 const ForecastSideBar = ({
@@ -32,6 +37,10 @@ const ForecastSideBar = ({
   const [checkId, setCheckId] = useState("");
 
   function handleClick(id: string) {
+    if (id === "close-button") {
+      setPressed(false);
+      return;
+    }
     if (checkId === id) {
       if (pressed) setPressed(false);
       else setPressed(true);
@@ -55,6 +64,7 @@ const ForecastSideBar = ({
 
   const infoElement = daily?.map((info: DailyWeatherData) => (
     <menu
+      data-active={`${checkId === info?.id ? true : false}`}
       onClick={(e) => handleClick(info.id)}
       key={info?.id}
       className="flex rounded h-11 border-radius cursor-pointer hover:bg-neutral-800 text-sm md:text-base "
@@ -67,8 +77,11 @@ const ForecastSideBar = ({
         />
         {`${info?.temp.max} / ${info?.temp.min}`}&#8451;
       </li>
-      <li className=" py-1 pr-2 max-w-20 text-center text-xs">
+      <li className=" grid place-content-center  pr-1 max-w-16 text-center text-xs">
         {info?.description}
+      </li>
+      <li className="py-2 px-2">
+        <FontAwesomeIcon icon={faCaretDown} />
       </li>
     </menu>
   ));
@@ -158,8 +171,6 @@ const ForecastSideBar = ({
                   <p>{info?.feels_like.night}&#8451;</p>
                 </aside>
               </section>
-              {/* <p className="bg-cyan-600"></p>
-              <p className="whitespace-nowrap"></p> */}
             </aside>
           </section>
           <section className="pt-6">
@@ -184,9 +195,15 @@ const ForecastSideBar = ({
         <div>
           <menu
             ref={navRef}
-            className={` bg-neutral-800 rounded   py-2 h-11 flex overflow-x-auto whitespace-nowrap mx-auto ${styles.scroll_div}`}
+            className={` relative bg-neutral-800 rounded py-2 h-11 flex overflow-x-auto whitespace-nowrap mx-auto ${styles.scroll_div}`}
           >
             {topbarElement}
+            <button
+              onClick={(e) => handleClick("close-button")}
+              className=" bg-neutral-800 px-2 sticky right-0  "
+            >
+              <FontAwesomeIcon icon={faCaretUp} />
+            </button>
           </menu>
           {forecasteDetailElement}
         </div>
