@@ -14,7 +14,11 @@ Responsive Design: Optimized for seamless usage across desktop and mobile device
 
 ## Getting Started
 
-Clone the repository: git clone https://github.com/vivek700/AtmoSphere.git
+Clone the repository:
+
+```bash
+git clone https://github.com/vivek700/AtmoSphere.git
+```
 
 First, Install dependencies and run the development server:
 
