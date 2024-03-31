@@ -13,7 +13,22 @@ Responsive Design: Optimized for seamless usage across desktop and mobile device
 
 ## Getting Started
 
-Clone the repository: git clone https://github.com/your-username/atmosphere.git
-Install dependencies: npm install
-Start the development server: npm start
+Clone the repository: git clone https://github.com/vivek700/AtmoSphere.git
+
+npm install
+
+First, Install dependencies and run the development server:
+
+```bash
+npm install
+# then
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
 Open your browser and visit: http://localhost:3000
