@@ -7,8 +7,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Weather App",
-  description: "Hyper-accurate weather forecasts at your fingertips.",
+  title: "AtmoSphere | A Weather App",
+  description:
+    "AtmoSphere - Simple weather app with OpenWeather's current conditions, hourly and 8-day forecasts. Stay up-to-date on the go.",
 };
 
 export default function RootLayout({

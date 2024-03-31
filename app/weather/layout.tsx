@@ -2,9 +2,7 @@ import { BackgroundGradient } from "@/app/components/ui/background-gradient";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Weather and Forecast",
-  description:
-    "Get instant, hyperlocal weather updates tailored to your exact location.",
+  title: "AtmoSphere | Weather Forecasts from OpenWeather",
 };
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
