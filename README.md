@@ -20,11 +20,15 @@ Clone the repository:
 git clone https://github.com/vivek700/AtmoSphere.git
 ```
 
-First, Install dependencies and run the development server:
+First, Install dependencies:
 
 ```bash
 npm install
-# then
+```
+
+Then, run the development server:
+
+```bash
 npm run dev
 # or
 yarn dev
