@@ -9,13 +9,12 @@ Current Weather: Get real-time information on temperature, humidity, wind speed,
 Hourly Forecasts: Plan your day with hourly weather predictions for the next 24 hours.
 
 Daily Forecasts: Stay ahead with 8-day forecasts, including high/low temperatures and precipitation chances.
+
 Responsive Design: Optimized for seamless usage across desktop and mobile devices.
 
 ## Getting Started
 
 Clone the repository: git clone https://github.com/vivek700/AtmoSphere.git
-
-npm install
 
 First, Install dependencies and run the development server:
 
