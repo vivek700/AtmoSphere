@@ -74,7 +74,7 @@ export default function Home() {
         </button>
         <>
           {isLoc.error ? (
-            <p className="text-red-600">
+            <p className="text-red-600 text-center z-10 text-sm md:text-base">
               Location Unavailable: {isLoc?.error_message}
             </p>
           ) : null}
