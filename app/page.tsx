@@ -47,6 +47,7 @@ export default function Home() {
       } else {
         const query = `long=${long}&lati=${lati}`;
         router.push(`/weather?${query}`);
+        setLoading(false);
       }
     } catch (error) {}
   }
@@ -60,7 +61,7 @@ export default function Home() {
           type="button"
           disabled={loading}
           onClick={handleLocation}
-          className="mb-4 flex justify-center items-center space-x-2 text-white font-semibold hover:scale-110 transition-all duration-300 ease-in-out bg-cyan-500 px-5 py-3 rounded-full hover:text-cyan-500 hover:bg-black shadow-lg shadow-cyan-500/50 focus:outline-none focus:ring focus:ring-cyan-300"
+          className="mb-4 flex justify-center items-center transition duration-300 ease-in-out space-x-2 text-white font-semibold bg-cyan-500 px-5 py-3 rounded-full hover:text-cyan-500 hover:bg-black shadow-lg shadow-cyan-500/50 focus:outline-none focus:ring focus:ring-cyan-300 hover:scale-110 "
         >
           Get Started
           {loading ? (
@@ -79,7 +80,7 @@ export default function Home() {
             </p>
           ) : null}
         </>
-        <p className="text-4xl sm:text-7xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 py-8 ">
+        <p className="text-4xl sm:text-7xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 py-8">
           AtmoSphere
         </p>
       </div>
