@@ -4,9 +4,6 @@ import { CurrentWeatherData, DailyWeatherData, HourlyWeatherData, LocationData, 
 import { v4 as uuidv4 } from 'uuid'
 
 
-
-
-
 const getCityName = async (latitude: number, longitude: number, apiKey: string) => {
 
 
@@ -46,7 +43,6 @@ const getWeatherData = async (latitude: number, longitude: number, apiKey: strin
     return data
 
 }
-
 
 export const FetchData = async (latitude: number = 27.00092, longitude: number = 81.24365) => {
 
@@ -164,6 +160,21 @@ export const FetchData = async (latitude: number = 27.00092, longitude: number =
 }
 
 
+
+export const fetchCoords = async (city: string) => {
+
+    const apiKey: string = process.env.API_KEY || ""
+
+
+    const res = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`, { cache: 'no-store' })
+
+    if (!res.ok) {
+        throw new Error('Failed to fetch coords.')
+    }
+    const cityData = await res.json()
+    return cityData
+
+}
 
 
 

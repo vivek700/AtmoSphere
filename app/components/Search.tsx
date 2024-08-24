@@ -1,0 +1,93 @@
+"use client";
+
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fetchCoords } from "../lib/data";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+
+const Search = () => {
+  const router = useRouter();
+
+  const [listVisibility, setListVisibility] = useState(false);
+
+  const [searchCityName, setSearchCityName] = useState<string>("");
+  const [cities, setCities] = useState([]);
+
+  const handleChange = (term: string) => {
+    setSearchCityName(term);
+    if (!term) {
+      setListVisibility(false);
+    }
+  };
+
+  const handleSearch = async () => {
+    const res = await fetchCoords(searchCityName);
+    if (res.length > 0) {
+      setCities(res);
+      setListVisibility(true);
+    } else {
+      setListVisibility(false);
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      if (!searchCityName) return;
+      handleSearch();
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchCityName]);
+
+  const handlePath = (lon: number, lat: number) => {
+    const query = `long=${lon}&lati=${lat}`;
+    router.push(`/weather?${query}`);
+    setListVisibility(false);
+  };
+
+  const cityElement = cities?.map((city) => {
+    return (
+      <li
+        key={city.lat}
+        onClick={() => handlePath(city?.lon, city?.lat)}
+        className="py-1 px-2 mb-2 mt-1 rounded bg-[#212125] cursor-pointer"
+      >
+        {city.name}, {city.state}, {city.country}
+      </li>
+    );
+  });
+
+  return (
+    <>
+      <section className="relative">
+        <input
+          type="text"
+          className="py-1 mb-3 max-w-72 px-9 rounded-md border bg-[#18181B] border-gray-400 text-gray-200"
+          placeholder="Search cities..."
+          onChange={(e) => handleChange(e.target.value)}
+          defaultValue={searchCityName}
+          onClick={(e) => {
+            if (e.target?.value) {
+              setListVisibility(true);
+            }
+          }}
+        />
+        <FontAwesomeIcon
+          icon={faMagnifyingGlass}
+          className="w-5 h-5 text-gray-400 absolute left-2 top-2"
+        />
+
+        {listVisibility && (
+          <section className=" bg-[#18181B] text-gray-300 absolute w-full max-w-72 border border-gray-400 rounded-md px-4 py-2 ">
+            <ul>{cityElement}</ul>
+          </section>
+        )}
+      </section>
+    </>
+  );
+};
+
+export default Search;

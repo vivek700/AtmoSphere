@@ -8,6 +8,7 @@ import { Icon } from "../lib/Icon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket, faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import WindDir from "./WindDir";
+import Search from "./Search";
 
 const CurrentWeatherInfo = async ({
   latitude,
@@ -26,7 +27,8 @@ const CurrentWeatherInfo = async ({
   return (
     <>
       <div className="flex flex-col md:flex-row">
-        <section className=" flex-1 ">
+        <section className=" flex-1">
+          <Search />
           <TimeAndDate
             dt={weatherData?.current.dt}
             timezone_offset={weatherData.timezone_offset}
