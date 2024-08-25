@@ -69,6 +69,15 @@ const Search = () => {
     );
   });
 
+  useEffect(() => {
+    if (listVisibility) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [listVisibility]);
+
   return (
     <>
       <section className="relative">
