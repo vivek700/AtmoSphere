@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchCoords } from "../lib/data";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { city } from "../lib/definitions";
 
 const Search = () => {
   const router = useRouter();
@@ -16,10 +17,19 @@ const Search = () => {
 
   const handleChange = (term: string) => {
     setSearchCityName(term);
-    if (!term) {
-      setListVisibility(false);
-    }
+    if (term) return;
+    setListVisibility(false);
   };
+
+  function handleFocus() {
+    if (cities.length === 0) return;
+    setListVisibility(true);
+  }
+  function handleBlur() {
+    setTimeout(() => {
+      setListVisibility(false);
+    }, 100);
+  }
 
   const handleSearch = async () => {
     const res = await fetchCoords(searchCityName);
@@ -35,7 +45,7 @@ const Search = () => {
     const timer = setTimeout(async () => {
       if (!searchCityName) return;
       handleSearch();
-    }, 1000);
+    }, 700);
 
     return () => {
       clearTimeout(timer);
@@ -45,10 +55,9 @@ const Search = () => {
   const handlePath = (lon: number, lat: number) => {
     const query = `long=${lon}&lati=${lat}`;
     router.push(`/weather?${query}`);
-    setListVisibility(false);
   };
 
-  const cityElement = cities?.map((city) => {
+  const cityElement = cities?.map((city: city) => {
     return (
       <li
         key={city.lat}
@@ -64,16 +73,13 @@ const Search = () => {
     <>
       <section className="relative">
         <input
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           type="text"
           className="py-1 mb-3 max-w-72 px-9 rounded-md border bg-[#18181B] border-gray-400 text-gray-200"
           placeholder="Search cities..."
           onChange={(e) => handleChange(e.target.value)}
           defaultValue={searchCityName}
-          onClick={(e) => {
-            if (e.target?.value) {
-              setListVisibility(true);
-            }
-          }}
         />
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
@@ -81,7 +87,7 @@ const Search = () => {
         />
 
         {listVisibility && (
-          <section className=" bg-[#18181B] text-gray-300 absolute w-full max-w-72 border border-gray-400 rounded-md px-4 py-2 ">
+          <section className=" bg-[#18181B] text-gray-300 absolute w-full max-w-72 border border-gray-400 rounded-md px-4 py-2">
             <ul>{cityElement}</ul>
           </section>
         )}

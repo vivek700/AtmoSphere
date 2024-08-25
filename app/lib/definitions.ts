@@ -91,3 +91,11 @@ export type TimeData = {
   hours: string
   date: string
 }
+
+export type city = {
+  state: string
+  country: string
+  name: string
+  lon: number
+  lat: number
+}
