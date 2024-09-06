@@ -61,7 +61,7 @@ export default function Home() {
           type="button"
           disabled={loading}
           onClick={handleLocation}
-          className="mb-4 flex justify-center items-center transition duration-300 ease-in-out space-x-2 text-white font-semibold bg-cyan-500 px-5 py-3 rounded-full hover:text-cyan-500 hover:bg-black shadow-lg shadow-cyan-500/50 focus:outline-none focus:ring focus:ring-cyan-300 hover:scale-110 "
+          className="mb-2 flex justify-center items-center transition duration-300 ease-in-out space-x-2 text-white font-semibold bg-cyan-500 px-5 py-3 rounded-full  hover:bg-cyan-600 shadow-lg  shadow-cyan-500/50 focus:outline-none focus:ring focus:ring-cyan-300"
         >
           Get Started
           {loading ? (
