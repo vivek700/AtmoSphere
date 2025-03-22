@@ -93,7 +93,7 @@ const Search = () => {
 
   return (
     <>
-      <section className="relative max-w-72 ">
+      <section className="relative md:max-w-80 w-full ">
         <input
           onFocus={handleFocus}
           onBlur={handleBlur}
