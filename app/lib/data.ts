@@ -166,7 +166,7 @@ export const fetchCoords = async (city: string) => {
     const apiKey: string = process.env.API_KEY || ""
 
 
-    const res = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`, { cache: 'no-store' })
+    const res = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`, { cache: 'no-store' })
 
     if (!res.ok) {
         throw new Error('Failed to fetch coords.')

@@ -1,14 +1,27 @@
 "use client";
 
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchCoords } from "../lib/data";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { city } from "../lib/definitions";
 
 const Search = () => {
   const router = useRouter();
+
+  async function handleGetLocation() {
+    try {
+      const success = (position: GeolocationPosition) => {
+        const { latitude, longitude } = position.coords;
+        handlePath(longitude, latitude)
+      };
+      navigator.geolocation.getCurrentPosition(success);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const [listVisibility, setListVisibility] = useState(false);
 
@@ -80,12 +93,12 @@ const Search = () => {
 
   return (
     <>
-      <section className="relative">
+      <section className="relative max-w-72 ">
         <input
           onFocus={handleFocus}
           onBlur={handleBlur}
           type="text"
-          className="py-1 mb-3 max-w-72 px-9 rounded-md border bg-[#18181B] border-gray-400 text-gray-200"
+          className="py-1 mb-3 w-full  px-9 rounded-md border bg-[#18181B] border-gray-400 text-gray-200"
           placeholder="Search cities..."
           onChange={(e) => handleChange(e.target.value)}
           defaultValue={searchCityName}
@@ -94,6 +107,12 @@ const Search = () => {
           icon={faMagnifyingGlass}
           className="w-5 h-5 text-gray-400 absolute left-2 top-2"
         />
+        <FontAwesomeIcon
+          onMouseDown={handleGetLocation}
+          icon={faLocationDot}
+          className=" h-5 text-gray-400 absolute right-2 top-2 cursor-pointer hover:text-violet-300 focus:text-violet-300"
+        />
+
 
         {listVisibility && (
           <section className=" bg-[#18181B] text-gray-300 absolute w-full max-w-72 border border-gray-400 rounded-md px-4 py-2">
